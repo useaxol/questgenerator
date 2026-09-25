@@ -5,3 +5,6 @@ __pycache__/
 *.pyc
 ~$*.docx
 .DS_Store
+
+# pacote gerado por scripts/empacotar_skill.py
+dist/

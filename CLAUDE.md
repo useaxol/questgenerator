@@ -20,6 +20,7 @@ questionário disponível na conta: para projetos okno, use sempre as skills des
 | `scripts/checar_questionario.py` | Checador determinístico (pulos, referências, placeholders, escalas, maiúsculas) |
 | `scripts/gerar_docx.py` | Exporta o questionário .md para .docx no padrão visual okno |
 | `scripts/extrair_texto.py` | Extrai texto de docx/pptx/xlsx/pdf da pasta de entrada |
+| `scripts/empacotar_skill.py` | Gera `dist/okno-questionario.zip` para o admin subir no claude.ai (ver `empacotamento/`) |
 | `projetos/<slug>/` | Um projeto por pasta: `entrada/`, ficha, versões do questionário, pareceres, .docx |
 | `referencias/` | Guia de estilo e referências okno (índice do Drive) + benchmarks de mercado resumidos |
 
@@ -32,6 +33,7 @@ python3 scripts/gerar_docx.py projetos/<slug>/<tipo>-v<N>.md
 ```
 
 ## Regras
+- Ao alterar qualquer skill, rode `python3 scripts/empacotar_skill.py` e confirme que não há avisos de referências não convertidas.
 - Informação dos arquivos do projeto > referência okno > guia de estilo > conhecimento geral.
 - Perguntas ao usuário sempre com a opção **"Não tenho essa informação"**; só então a IA cria a informação e marca
   `[PROPOSTO PELA IA — VALIDAR]`.

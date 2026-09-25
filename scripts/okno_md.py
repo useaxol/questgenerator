@@ -1,6 +1,6 @@
 """Parser do formato intermediário de questionários okno (.md).
 
-Formato descrito em .claude/skills/okno-questionario/references/formato-markdown.md.
+Formato descrito em formato-markdown.md (skill okno-questionario).
 Usado por checar_questionario.py e gerar_docx.py.
 """
 from __future__ import annotations

@@ -57,6 +57,11 @@ Os modelos quali e os módulos também usam benchmarks de mercado (`referencias/
 Para acrescentar novos questionários de referência, ponha-os no Drive (pasta Okno) ou em `referencias/` e peça ao
 Claude: *"atualize as skills okno com os padrões deste questionário"*.
 
+## Distribuir para a okno (claude.ai)
+
+`python3 scripts/empacotar_skill.py` gera `dist/okno-questionario.zip`, uma skill única e autocontida que o admin da
+conta okno sobe no claude.ai para toda a organização. Passo a passo em `empacotamento/README.md`.
+
 ## Scripts
 
 ```bash
