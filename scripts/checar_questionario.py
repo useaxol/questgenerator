@@ -219,7 +219,8 @@ def check(doc: Doc) -> Report:
                 lab = strip_accents(o["label"].lower())
                 if re.match(r"^(nenhum|nenhuma)\b", lab) and o["code"] not in ("99", "///", "//", ""):
                     rep.add("ALERTA", q.label, f"Opção '{o['label']}' deveria ter código 99 (EXCLUSIVA).")
-                if screening and o["action"] is not None and not o["action"]:
+                if screening and o["action"] is not None and not o["action"] \
+                        and not re.match(r"^(anote|write down|anotar)", lab):
                     rep.add("ERRO", q.label, f"Opção '{o['label']}' sem roteamento (CONTINUE / ENCERRE / PULE PARA) em seção de triagem.")
             if screening and opts and all(o["action"] is None for o in opts) and not re.fullmatch(r"[A-L]|CB\d+", q.qid):
                 if any(o["code"] for o in opts):
