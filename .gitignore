@@ -1,0 +1,7 @@
+# dados de cliente não vão para o git
+projetos/*/entrada/
+!projetos/_exemplo-*/entrada/
+__pycache__/
+*.pyc
+~$*.docx
+.DS_Store
