@@ -5,7 +5,7 @@ Uso:
     python3 scripts/extrair_texto.py <arquivo> [<arquivo> ...]
     python3 scripts/extrair_texto.py projetos/<slug>/entrada/      (todos os arquivos da pasta)
 
-Dependências opcionais: python-docx, python-pptx, openpyxl, pdfplumber (ou pdftotext no sistema).
+Dependências opcionais: python-docx, python-pptx, openpyxl, pypdf (ou pdftotext no sistema).
 """
 from __future__ import annotations
 
@@ -66,10 +66,9 @@ def xlsx_text(p: Path) -> str:
 
 def pdf_text(p: Path) -> str:
     try:
-        import pdfplumber
+        from pypdf import PdfReader
 
-        with pdfplumber.open(p) as pdf:
-            return "\n".join((pg.extract_text() or "") for pg in pdf.pages)
+        return "\n".join((pg.extract_text() or "") for pg in PdfReader(p).pages)
     except ImportError:
         return subprocess.run(["pdftotext", "-layout", str(p), "-"], capture_output=True, text=True).stdout
 
