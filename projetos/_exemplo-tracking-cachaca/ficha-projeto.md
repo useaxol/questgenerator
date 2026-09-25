@@ -17,6 +17,10 @@
 | Objetivo principal | Monitorar a saúde da marca 51 frente aos concorrentes, por praça | idem › estrutura |
 | O1 | Funil de marca (conhecimento → experimentação → uso habitual → preferência → rejeição) | idem › pirâmide |
 | O2 | Recomendação (NPS) e seus drivers para a 51 | idem › P.29–P.31 |
+| O3 | Imagem de marca da 51 vs. concorrentes | USUÁRIO |
+| O4 | Recall de comunicação (divulgação em placas de estádio) | USUÁRIO |
+| O5 | Locais de compra de cachaça | USUÁRIO |
+| O6 | Priorizar os fatores de escolha de marca de cachaça (MaxDiff) | USUÁRIO |
 
 ## 3. Metodologia
 | Campo | Valor | Fonte |
@@ -34,15 +38,30 @@
 | Idade | 25 a 65 anos | idem › P.3 |
 | Classes | B1 a DE+ (Novo Critério Brasil 2026) | idem › P.D |
 | Consumo | Destilados ao menos a cada 15 dias; cachaça ao menos 1x/mês | idem › P.6 / P.8 |
-| Praças | São Paulo, Rio de Janeiro, Recife, Porto Alegre (exemplo reduzido) | idem › cotas |
+| Praças | São Paulo, Rio de Janeiro, Recife, Porto Alegre | USUÁRIO |
 
 ## 5. Estímulos e listas
 | Campo | Valor | Fonte |
 |---|---|---|
 | Marcas | 51, Pitú, Velho Barreiro, Ypióca, Caninha da Roça (lista reduzida) | idem › tabela da pirâmide |
 
+| Atributos de imagem | 12 atributos do grid P.32 do tracking original (qualidade, suavidade, tradição, confiança…) | Brand Tracking - Bebidas Alcoólicas.docx › P.32 |
+| Lista de recall (placas de estádio) | Marcas da P.33/P.34 do tracking original | idem › P.33/P.34 |
+
 ## 6. Módulos
-Nenhum.
+| Módulo | Aplica? | Insumos | Fonte |
+|---|---|---|---|
+| MaxDiff | Sim | 14 fatores de escolha; critério "mais/menos importante na hora de escolher uma marca de cachaça"; 4 itens por tela; 11 telas; 300 versões | Itens, critério e desenho: [PROPOSTO PELA IA — VALIDAR] — usuário não tinha a lista; derivada dos atributos de imagem do tracking e de drivers típicos da categoria |
+
+## 8. Mapa objetivo → blocos
+| Objetivo | Bloco(s) | KPI |
+|---|---|---|
+| O1 | Pirâmide de marcas | % por nível do funil e conversões |
+| O2 | NPS + follow-ups da 51 | NPS por marca; razões |
+| O3 | Imagem de marca | % associação por atributo × marca |
+| O4 | Recall de comunicação | % recall espontâneo/estimulado da 51 |
+| O5 | Consumo da categoria | % por local de compra |
+| O6 | MaxDiff | Scores de importância (0–100) |
 
 ## 9. Pendências [PROPOSTO PELA IA — VALIDAR]
-- Nenhuma (exemplo).
+- Lista de itens, critério e desenho do MaxDiff (O6).

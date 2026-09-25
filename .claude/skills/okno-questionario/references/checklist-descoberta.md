@@ -31,11 +31,11 @@ Copie o modelo abaixo para `projetos/<slug>/ficha-projeto.md` e preencha. Coluna
 |---|---|---|---|
 | Abordagem (quali / quanti / híbrido) | | | Essencial |
 | Tipo de questionário (ver etapa 3) | | | Essencial |
-| Técnica de coleta (online, CAPI, CATI, face a face, CLT, HUT, GD, EP, etnografia) | | | Essencial |
+| Técnica de coleta (online, CAPI = presencial com tablet, papel, CATI, CLT, HUT, GD, EP, etnografia) | | | Essencial |
 | Desenho (monádico, monádico sequencial, pareado, blind/branded, nº de células) | | | Essencial p/ testes |
 | Duração da entrevista / sessão | | | Opcional (quanti 15–20 min; GD 120 min; EP 60 min) |
 | Nº de entrevistas / grupos / células | | | Essencial |
-| Ondas (tracking) e comparabilidade com ondas anteriores | | | Essencial p/ tracking |
+| Onda de tracking existente? (Sim → pedir questionário anterior e manter numeração/códigos; Não → numeração nova) | | | Essencial p/ tracking |
 
 ## 4. Público e amostra
 | Campo | Valor | Fonte | Nível |

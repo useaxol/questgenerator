@@ -104,4 +104,7 @@ Marcas/códigos-alvo de filtro são sinalizados **em cinza** na tabela (no .docx
 7. As cotas do cabeçalho apontam para as perguntas corretas (ex.: `A. SEXO (P.1)`) e os códigos batem.
 8. Transferências automáticas estão previstas para toda RU derivada de RM.
 9. Filtros compostos (`DEVE CITAR…`) são coerentes com o público do briefing.
-10. Não sobrou placeholder (`CONTINUAR OU ENCERRAR`, `[INSERIR…]`, `____` sem instrução do que inserir).
+10. Não sobrou placeholder (`CONTINUAR OU ENCERRAR`, `[INSERIR…]`, `____` sem instrução do que inserir,
+    linhas `MARCA 1…N` sem tabela de marcas por praça + instrução de pipe).
+11. Todo nível de funil/lista que pode ficar vazio tem `Nenhuma` (99) ou pulo explícito; nenhuma RU com base vazia.
+12. Toda coluna de cota tem pergunta de origem, com rótulos e códigos idênticos.

@@ -15,7 +15,8 @@ modulos: [psm]             # [] | [conjoint, maxdiff, psm]
 entrevistas: 1500          # ou "8 GRUPOS" / "20 EPs"
 data: FEVEREIRO DE 2026
 idioma: pt                 # pt | en
-modo: presencial           # presencial | online | cati | capi | clt | hut | gd | ep
+modo: capi                 # papel | capi (presencial com tablet) | online | cati | clt | hut | gd | ep
+                           # 'presencial' = papel. Se há "MOSTRAR TABLET", use capi. capi/online/clt/hut exigem NOVA TELA.
 painel: PESQUISE+          # opcional (texto no canto do cabeçalho)
 classificacao: ""          # opcional, ex.: "ESSITY INTERNAL" (vai no rodapé)
 ---
@@ -44,8 +45,11 @@ ENTREVISTADOR: MOSTRAR CARTÃO 3
 | Nenhuma destas | 99 | ENCERRE |
 ```
 
-- Cabeçalho: `### <ID> <enunciado com códigos>`. ID = `P.<n>` / `Q.<n>` (com sufixo opcional `a`, `A`, `_1`) ou
-  letra de controle `A.`, `B.`… ou filtro `S1.`.
+- Cabeçalho: `### <ID> <enunciado com códigos>`. ID = `P.<n>` / `Q.<n>` (com sufixo opcional `a`, `A`, `_1`),
+  filtro `S1.` ou Critério Brasil `CB1.`, `CB2.`… **Não use letras soltas (`A.`, `B.`) como ID de pergunta**: as letras
+  são reservadas às colunas de cota, referidas como `P.<LETRA> DO CONTROLE DE COTAS`.
+- Tabela de cotas: cabeçalho `| A. SEXO (P.4) | Cód | B. IDADE (P.5) | Cód | …` — a pergunta de origem entre parênteses
+  é obrigatória e os **rótulos e códigos devem ser idênticos aos da pergunta de origem** (o checador confere).
 - Linhas de instrução começam com `PROGRAMAÇÃO:`, `PROGRAMADOR:`, `PN:`, `PROGRAMMING:`, `ENTREVISTADOR:`,
   `INTERVIEWER:`, `PROCESSAMENTO:`, `NOVA TELA`, `NEW SCREEN`, `APLICAR`, `APPLY`, `SOMENTE`, `ONLY`, `SE `, `DEVE`,
   `MUST` — sempre em MAIÚSCULAS.

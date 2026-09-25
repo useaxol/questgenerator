@@ -32,8 +32,9 @@ Antes de redigir, leia as referências conforme a necessidade:
 5. **`NOVA TELA:`** em linha própria, antes de cada pergunta/tela (obrigatório em estudos online/CAPI).
 6. **Numeração sequencial** `P.1, P.2…` (PT) ou `Q.1, Q.2…` (EN). Sub-perguntas derivadas: `P.4a`, `P.64A…P.64D`.
    Perguntas de controle de cotas/classificação usam letras: `A.`, `B.`, `C.`…
-7. **O texto da introdução menciona o tema geral, nunca o cliente** (o cliente só pode ser revelado no fim, no
-   aceite de compartilhamento de contato, se o briefing pedir).
+7. **O texto da introdução menciona o tema geral, nunca o cliente**. Perguntas específicas sobre a marca-cliente
+   (follow-ups de NPS, aprofundamentos) são permitidas **depois** do funil, quando ela já apareceu entre as demais
+   marcas; o que não pode é identificá-la como contratante antes do fim (aceite de compartilhamento de contato).
 8. **Ancoragem de "Outro" e "Nenhum"**: `Outro (especifique)` e `Nenhum destes` são sempre **FIXOS** no fim da
    lista; `Nenhum` é **EXCLUSIVO** e usa código **99** (`98` = Não sei / Não lembro).
 9. **Escalas são sempre as da `references/escalas.md`**, 5 pontos com todos os pontos nomeados, do negativo (1)

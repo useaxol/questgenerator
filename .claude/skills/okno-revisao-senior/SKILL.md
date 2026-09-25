@@ -63,6 +63,10 @@ Monte a matriz **Objetivo/área de abordagem × perguntas** a partir da ficha (n
   enunciado ambíguo, cobertura parcial).
 - **BAIXA**: estilo/refino.
 
+Cada apontamento conta **uma vez**, na dimensão da causa-raiz (ex.: falta pergunta de praça = Dim 1), mesmo que
+afete outra dimensão; cite a outra dimensão na coluna Problema. Cobertura PARCIAL causada por um apontamento ALTA
+herda a severidade dele.
+
 ## Veredito
 - `APROVADO` — 0 ALTA, 0 MÉDIA.
 - `APROVADO COM RESSALVAS` — 0 ALTA, ≤ 3 MÉDIA, todas com correção simples.

@@ -42,6 +42,7 @@ PLACEHOLDERS = [
     ("[PERSONALIZAR", "ERRO"),
     ("XXX", "ALERTA"),
 ]
+GENERIC_BRAND_RE = re.compile(r"^\s*MARCA\s+\d+\s*$", re.IGNORECASE)
 
 STD_SCALES = {
     "Aceitação (passado)": ["não gostei nada", "não gostei", "nem gostei nem desgostei", "gostei", "gostei muito"],
@@ -192,11 +193,11 @@ def check(doc: Doc) -> Report:
         # código de tipo de resposta
         if not is_roteiro:
             blob = q.text + " " + " ".join(s for _, s in q.pre_lines + q.body_lines)
-            if not TYPE_CODE_RE.search(blob) and not re.fullmatch(r"[A-L]", q.qid):
+            if not TYPE_CODE_RE.search(blob) and not re.fullmatch(r"[A-L]|CB\d+", q.qid):
                 rep.add("ALERTA", q.label, "Sem código de tipo de resposta — (RU), (RM), (ESPONTÂNEO), (RU POR LINHA)...")
 
         # online / CAPI: NOVA TELA
-        if modo in ("online", "capi", "clt", "hut") and not q.new_screen:
+        if modo in ("online", "capi", "clt", "hut") and not q.new_screen and not re.fullmatch(r"CB\d+", q.qid):
             rep.add("ALERTA", q.label, "Falta 'NOVA TELA:' antes da pergunta (modo online/CAPI).")
 
         # rodízio em perguntas de marca estimuladas
@@ -220,7 +221,7 @@ def check(doc: Doc) -> Report:
                     rep.add("ALERTA", q.label, f"Opção '{o['label']}' deveria ter código 99 (EXCLUSIVA).")
                 if screening and o["action"] is not None and not o["action"]:
                     rep.add("ERRO", q.label, f"Opção '{o['label']}' sem roteamento (CONTINUE / ENCERRE / PULE PARA) em seção de triagem.")
-            if screening and opts and all(o["action"] is None for o in opts) and not re.fullmatch(r"[A-L]", q.qid):
+            if screening and opts and all(o["action"] is None for o in opts) and not re.fullmatch(r"[A-L]|CB\d+", q.qid):
                 if any(o["code"] for o in opts):
                     rep.add("ALERTA", q.label, "Pergunta de triagem sem coluna 'Ação' (roteamento).")
 
@@ -260,6 +261,72 @@ def check(doc: Doc) -> Report:
                 if best and best_hit >= 3 and (best_hit < 5 or len(labels) != 5):
                     rep.add("ALERTA", q.label, f"Escala parecida com '{best}', mas diferente do padrão okno: "
                             f"{' / '.join(STD_SCALES[best])}.")
+
+    # ---------- IDs de letra (reservadas às cotas)
+    for q in qs:
+        if re.fullmatch(r"[A-L]", q.qid):
+            rep.add("ALERTA", q.label, "ID de letra solta colide com as colunas de cota — use CB1., CB2. (Critério Brasil) ou P.n.")
+
+    # ---------- modo x tablet
+    full_up = "\n".join(doc.lines).upper()
+    if "TABLET" in full_up and modo not in ("capi", "online", "clt", "hut"):
+        rep.add("ALERTA", "frontmatter", "O questionário usa TABLET, mas modo não é 'capi' — presencial com tablet = capi (exige NOVA TELA).")
+
+    # ---------- MARCA 1…N genéricas
+    for q in qs:
+        for t in q.tables:
+            if any(GENERIC_BRAND_RE.match(r[0] if r else "") for r in t.rows):
+                blob = (q.text + " " + " ".join(s for _, s in q.pre_lines + q.body_lines)).upper()
+                if "PIPE" not in blob and "SELECIONADAS" not in blob and "PRAÇA" not in blob:
+                    rep.add("ERRO", q.label, "Linhas 'MARCA 1…N' sem instrução de pipe/tabela de marcas por praça — placeholder.")
+                else:
+                    rep.add("ALERTA", q.label, "Linhas 'MARCA 1…N': confirme que existe a tabela de marcas avaliadas por praça.")
+
+    # ---------- funil: base vazia
+    for q in qs:
+        for t in q.tables:
+            for ci, cq in combined_columns(t):
+                tq = next((x for x in qs if x.qid == cq), None)
+                if tq is None:
+                    continue
+                blob = (tq.text + " " + " ".join(s for _, s in tq.pre_lines + tq.body_lines)).upper()
+                piped = "ACEITAR APENAS" in blob or "ACEITAR SOMENTE" in blob or "PIPE" in blob
+                col = [(r + [""] * len(t.header))[ci].strip() for r in t.rows]
+                has_none = "99" in col
+                none_rule = re.search(r"NENHUM[A]?\b.*(PULE|VÁ|VA |PULAR|SKIP|GO TO|ENCERRE)", blob) is not None
+                guarded = "SOMENTE PARA" in blob or "(FILTRO" in blob or "ONLY FOR" in blob
+                if piped and not has_none and not none_rule and not guarded:
+                    rep.add("ALERTA", tq.label, "Nível de funil com pipe sem código 'Nenhuma' (99) nem pulo para base vazia — pode travar a programação.")
+
+    # ---------- cotas x perguntas de origem
+    for s in doc.sections:
+        if s.kind != "cotas":
+            continue
+        for t in s.tables:
+            for ci, h in enumerate(t.header):
+                m = re.match(r"\s*([A-L])\.\s*(.+)$", h)
+                if not m:
+                    continue
+                src = re.search(r"\(([PQ])\.?\s?(\d+[A-Za-z]?)", h)
+                if not src:
+                    rep.add("ALERTA", f"COTA {m.group(1)}", f"Cota '{h}' sem pergunta de origem '(P.x)'.")
+                    continue
+                sq = src.group(2).upper()
+                if sq not in pos:
+                    rep.add("ERRO", f"COTA {m.group(1)}", f"Cota aponta para P.{sq}, que não existe.")
+                    continue
+                if ci + 1 >= len(t.header):
+                    continue
+                qopts = {norm_label(o["label"]): o["code"] for o in codes.get(sq, [])}
+                for r in t.rows:
+                    r = r + [""] * len(t.header)
+                    lab, cod = norm_label(r[ci]), r[ci + 1].strip()
+                    if not lab or not cod:
+                        continue
+                    if lab not in qopts:
+                        rep.add("ERRO", f"COTA {m.group(1)}", f"'{r[ci]}' não é opção de P.{sq}.")
+                    elif qopts[lab] != cod:
+                        rep.add("ERRO", f"COTA {m.group(1)}", f"'{r[ci]}' tem código {cod} na cota e {qopts[lab]} em P.{sq}.")
 
     # ---------- blocos obrigatórios
     full = "\n".join(doc.lines).upper()

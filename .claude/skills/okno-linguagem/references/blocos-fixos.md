@@ -47,7 +47,7 @@ only items that are working or that you intend to repair in the next 6 months. D
 | Geladeira, independentemente do número de portas, mas excluindo equipamentos que sejam apenas freezer? (Se sim) Quantas? | 0 | 6 | 10 | 12 | 13 |
 
 **B. Até que ano de escola o chefe de família cursou? Considere a última série concluída.**
-**C. (SE ENTREVISTADO NÃO FOR CHEFE DE FAMÍLIA, PERGUNTE. CASO CONTRÁRIO, TRANSFIRA RESPOSTA ANTERIOR PARA P.C) Até que ano de escola você cursou?**
+**C. (OPCIONAL — PERFIL; NÃO PONTUA) (SE ENTREVISTADO NÃO FOR CHEFE DE FAMÍLIA, PERGUNTE. CASO CONTRÁRIO, TRANSFIRA RESPOSTA ANTERIOR PARA P.C) Até que ano de escola você cursou?**
 
 | Nomenclatura antiga | Nomenclatura atual | Chefe da família |
 |---|---|---|

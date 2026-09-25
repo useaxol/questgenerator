@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 QID_RE = re.compile(
-    r"^###\s+((?:P|Q)\.\s?\d+[A-Za-z]?(?:_\d+)?|[A-L]\.|S\d+\.?)\s*(.*)$"
+    r"^###\s+((?:P|Q)\.\s?\d+[A-Za-z]?(?:_\d+)?|[A-L]\.|S\d+\.?|CB\d+\.?)\s*(.*)$"
 )
 INSTR_PREFIXES = (
     "PROGRAMAÇÃO", "PROGRAMACAO", "PROGRAMADOR", "PROGRAMMING", "PROG:", "PN:", "PN ",
